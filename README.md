@@ -76,15 +76,6 @@ for i in $(seq 1 5); do ssh pirate@localhost; done
 
 Au-delà du seuil, l'IP est détectée et bloquée (ou affichée en `MODE_TEST`).
 
-## Ce que j'ai appris
-
-- Lire un fichier de log **en temps réel** (`seek(0, 2)` + boucle de lecture)
-- Extraire une donnée avec une **expression régulière**
-- Compter efficacement avec `collections.Counter`
-- Exécuter une commande système depuis Python (`subprocess`)
-- Le principe d'une **liste blanche** pour ne pas se bloquer soi-même
-- Les bases du pare-feu Linux (`iptables`)
-
 ## Améliorations possibles
 
 - Débloquer automatiquement une IP après un délai (bannissement temporaire)
