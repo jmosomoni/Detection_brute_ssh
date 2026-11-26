@@ -1,4 +1,4 @@
-# 🚨 Détecteur de force brute SSH
+# Détecteur de force brute SSH
 
 Script Python qui surveille en temps réel le journal d'authentification Linux,
 détecte les attaques par force brute SSH (tentatives de connexion répétées), et
@@ -8,13 +8,13 @@ Projet d'apprentissage en cybersécurité défensive.
 
 ---
 
-## 🎯 Objectif
+## Objectif
 
 Reproduire le comportement d'un outil anti-brute-force (type *fail2ban*, en
 version minimaliste et pédagogique) : lire les logs, compter les échecs par IP,
 et réagir au-delà d'un seuil.
 
-## ⚙️ Fonctionnement
+## Fonctionnement
 
 ```
 /var/log/auth.log ──► lecture en temps réel ──► compte les échecs par IP
@@ -30,13 +30,13 @@ et réagir au-delà d'un seuil.
 4. Dès qu'une IP atteint le **seuil**, elle est **bloquée** via `iptables`
    (sauf si elle est en **liste blanche**, ex. `127.0.0.1`).
 
-## 🛠️ Technologies
+## Technologies
 
 - **Python 3** — `re` (regex), `collections.Counter`, `subprocess`, lecture de log en flux
 - **iptables** — pare-feu Linux pour le blocage
 - **Linux** — journal `/var/log/auth.log`
 
-## 🚀 Utilisation
+## Utilisation
 
 ```bash
 # Nécessite les droits root (lecture du log + iptables)
@@ -52,10 +52,10 @@ BLANCHE = {"::1", "127.0.0.1"}    # IP à ne jamais bloquer
 MODE_TEST = False                 # True = simulation (affiche sans bloquer)
 ```
 
-💡 Mets `MODE_TEST = True` pour tester sans réellement bloquer : le script
+Mets `MODE_TEST = True` pour tester sans réellement bloquer : le script
 affiche la commande `iptables` qu'il **aurait** lancée.
 
-## 🔓 Débloquer une IP
+## Débloquer une IP
 
 ```bash
 # Débloquer une IP précise
@@ -65,7 +65,7 @@ sudo iptables -D INPUT -s <adresse_ip> -j DROP
 sudo iptables -F INPUT
 ```
 
-## 🧪 Tester l'outil
+## Tester l'outil
 
 Générer des échecs de connexion SSH (sur une machine de test) :
 
@@ -74,9 +74,9 @@ Générer des échecs de connexion SSH (sur une machine de test) :
 for i in $(seq 1 5); do ssh pirate@localhost; done
 ```
 
-➡️ Au-delà du seuil, l'IP est détectée et bloquée (ou affichée en `MODE_TEST`).
+Au-delà du seuil, l'IP est détectée et bloquée (ou affichée en `MODE_TEST`).
 
-## 📚 Ce que j'ai appris
+## Ce que j'ai appris
 
 - Lire un fichier de log **en temps réel** (`seek(0, 2)` + boucle de lecture)
 - Extraire une donnée avec une **expression régulière**
@@ -85,7 +85,7 @@ for i in $(seq 1 5); do ssh pirate@localhost; done
 - Le principe d'une **liste blanche** pour ne pas se bloquer soi-même
 - Les bases du pare-feu Linux (`iptables`)
 
-## 🔜 Améliorations possibles
+## Améliorations possibles
 
 - Débloquer automatiquement une IP après un délai (bannissement temporaire)
 - Envoyer une alerte par e-mail à chaque blocage
